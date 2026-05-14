@@ -2,6 +2,7 @@ package com.microservicesQuiz.question_service.controller;
 
 
 import com.microservicesQuiz.question_service.model.Question;
+import com.microservicesQuiz.question_service.model.QuestionWrapper;
 import com.microservicesQuiz.question_service.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,9 @@ public class QuestionController {
 
 
     //get the question based on question id for quiz id
-
+    @PostMapping("getQuestions")
+    public ResponseEntity<List<QuestionWrapper>> getQuestionsForId(@RequestBody List<Integer> questionIds){
+        return questionService.getQuestionsForId(questionIds);
+    }
     //get score
 }
