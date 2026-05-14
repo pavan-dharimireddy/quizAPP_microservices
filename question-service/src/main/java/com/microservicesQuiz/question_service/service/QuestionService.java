@@ -3,6 +3,7 @@ package com.microservicesQuiz.question_service.service;
 
 import com.microservicesQuiz.question_service.model.Question;
 import com.microservicesQuiz.question_service.model.QuestionWrapper;
+import com.microservicesQuiz.question_service.model.Response;
 import com.microservicesQuiz.question_service.repo.QuestionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,5 +67,16 @@ public class QuestionService {
             wrappers.add(wrapper);
         }
         return  new ResponseEntity<>(wrappers,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getScore(List<Response> responses) {
+        int right = 0;
+        for(Response res : responses){
+            Question question = questionDAO.findById(res.getId()).get();
+            if(question.getRightAnswer().equals(res.getResponse())){
+                right++;
+            }
+        }
+        return new ResponseEntity<>(right,HttpStatus.OK);
     }
 }

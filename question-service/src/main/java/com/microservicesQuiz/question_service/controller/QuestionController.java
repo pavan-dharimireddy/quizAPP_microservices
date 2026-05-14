@@ -3,6 +3,7 @@ package com.microservicesQuiz.question_service.controller;
 
 import com.microservicesQuiz.question_service.model.Question;
 import com.microservicesQuiz.question_service.model.QuestionWrapper;
+import com.microservicesQuiz.question_service.model.Response;
 import com.microservicesQuiz.question_service.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +45,10 @@ public class QuestionController {
     public ResponseEntity<List<QuestionWrapper>> getQuestionsForId(@RequestBody List<Integer> questionIds){
         return questionService.getQuestionsForId(questionIds);
     }
+
     //get score
+    @PostMapping("getScore")
+    public ResponseEntity<Integer> getScore(@RequestBody List<Response> responses){
+        return questionService.getScore(responses);
+    }
 }
